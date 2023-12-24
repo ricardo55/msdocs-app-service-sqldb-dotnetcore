@@ -3,15 +3,23 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetCoreSqlDb.Data;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add database context and cache
+// Add database context and cache con sql server
 // builder.Services.AddDbContext<MyDatabaseContext>(options =>
 //     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnection")));
 // builder.Services.AddDistributedMemoryCache();
 
 // Add database context and cache con sqlite
+// builder.Services.AddDbContext<MyDatabaseContext>(options =>
+//     options.UseSqlite(builder.Configuration.GetConnectionString("LoginDBContextConnection")));
+// builder.Services.AddDistributedMemoryCache();
+
+// Add database context and cache con sqlite
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("LoginDBContextConnection")));
-builder.Services.AddDistributedMemoryCache();
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
+builder.Services.AddStackExchangeRedisCache(options =>{
+    options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
+    options.InstanceName = "SampleInstance";
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
