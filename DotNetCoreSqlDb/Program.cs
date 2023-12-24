@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add database context and cache con sqlite
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING;Trust Server Certificate=true")));
 builder.Services.AddStackExchangeRedisCache(options =>{
     options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
     options.InstanceName = "SampleInstance";
