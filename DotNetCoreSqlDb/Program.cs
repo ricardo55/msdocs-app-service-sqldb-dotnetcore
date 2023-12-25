@@ -8,12 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 //     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnection")));
 // builder.Services.AddDistributedMemoryCache();
 
+// Add database context and cache con postgresql
+// builder.Services.AddDbContext<MyDatabaseContext>(options =>
+//     options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionStringPSQL")));
+// builder.Services.AddDistributedMemoryCache();
+
 // Add database context and cache con sqlite
 // builder.Services.AddDbContext<MyDatabaseContext>(options =>
 //     options.UseSqlite(builder.Configuration.GetConnectionString("LoginDBContextConnection")));
 // builder.Services.AddDistributedMemoryCache();
 
-// Add database context and cache con sqlite
+// Add database context and cache con azure postgresql
 builder.Services.AddDbContext<MyDatabaseContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
 builder.Services.AddStackExchangeRedisCache(options =>{
