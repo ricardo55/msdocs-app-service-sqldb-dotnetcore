@@ -29,7 +29,7 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: dotnet install ef
-        run: dotnet tool install --global dotnet-ef --version 8.0.0
+        run: dotnet tool install --global dotnet-ef --version 7.0.14
 
       - name: dotnet bundle migration
         run: dotnet ef migrations bundle --runtime linux-x64 -p LoginCRUD/LoginCRUD.csproj -o ${{env.DOTNET_ROOT}}/myapp/migrate
