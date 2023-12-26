@@ -13,9 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddDistributedMemoryCache();
 
 // Add database context and cache con postgresql
-builder.Services.AddDbContext<LoginDBContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionStringPSQL")));
-builder.Services.AddDistributedMemoryCache();
+// builder.Services.AddDbContext<LoginDBContext>(options =>
+//     options.UseNpgsql(builder.Configuration.GetConnectionString("ConnectionStringPSQL")));
+// builder.Services.AddDistributedMemoryCache();
 
 // Add database context and cache con sqlite
 // builder.Services.AddDbContext<MyDatabaseContext>(options =>
@@ -23,12 +23,12 @@ builder.Services.AddDistributedMemoryCache();
 // builder.Services.AddDistributedMemoryCache();
 
 // Add database context and cache con azure postgresql
-// builder.Services.AddDbContext<MyDatabaseContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
-// builder.Services.AddStackExchangeRedisCache(options =>{
-//     options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
-//     options.InstanceName = "SampleInstance";
-// });
+builder.Services.AddDbContext<LoginDBContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
+builder.Services.AddStackExchangeRedisCache(options =>{
+    options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
+    options.InstanceName = "SampleInstance";
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -61,7 +61,7 @@ if (!app.Environment.IsDevelopment())
 app.UseDeveloperExceptionPage();
 app.UseDatabaseErrorPage();
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
