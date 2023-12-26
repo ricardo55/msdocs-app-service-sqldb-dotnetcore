@@ -1,0 +1,61 @@
+@model IEnumerable<DotNetCoreSqlDb.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Inventary</h1>
+
+<p>
+    <a class="btn btn-secondary" asp-action="Create">
+        <span class="material-symbols-outlined">add</span> Create New
+    </a>
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id"><span class="material-symbols-outlined">edit</span> Edit</a>
+
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><span class="material-symbols-outlined">info</span> Details</a>
+
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><span class="material-symbols-outlined">delete</span> Delete</a>
+                </td>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
